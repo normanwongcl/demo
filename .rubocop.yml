@@ -1,0 +1,19 @@
+# Custom configuration for rubocop linter 
+
+require:
+  - rubocop-rspec
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 3.1
+  SuggestExtensions: false
+
+# Disable top-level documentation comment
+Style/Documentation: 
+  Enabled: false
