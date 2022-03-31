@@ -6,20 +6,23 @@ on:
   push:
     branches:
      - "feature/*"
+     - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [ '3.0.0', '3.1.0' ] # Testing with ruby 3.0.0 and 3.1.0
+        ruby: [ '3.1.0' ] # Testing 3.1.0
         
     # Following a guide: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-ruby
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
-      - name: Install dependencies
+      - name: Setup rails api
         run: bundle install
-      - name: Run tests
+        working-directory: ./api
+      - name: Run tests on rails api
         run: bundle exec rspec
+        working-directory: ./api
